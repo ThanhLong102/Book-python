@@ -1,1 +1,1 @@
-web: gunicorn book-python-vip.wsgi
+web: gunicorn Book.wsgi

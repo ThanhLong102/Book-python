@@ -24,7 +24,7 @@ SECRET_KEY = 'django-insecure-6xhz$sxmipk8yc5ok0(u=(=d!9w$^-1j3ha*t7fxjj0&qha6+l
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1','book-python-vip.herokuapp.com']
 
 # Application definition
 
@@ -75,8 +75,12 @@ WSGI_APPLICATION = 'Book.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'dfr8hsscsjqb8o',
+        'USER': 'jgmdjpffrgtrhy',
+        'PASSWORD': 'bb037215c0d54949f227f5b4b00bedb251b4aa9e7fc3c24d84de32499f86f95c',
+        'HOST': 'ec2-3-227-149-67.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
