@@ -13,8 +13,8 @@ class Category(models.Model):
 class Item(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
     name = models.CharField(max_length=100)
-    image = models.CharField(max_length=100)
-    describes = models.CharField(max_length=100)
+    image = models.CharField(max_length=300)
+    describes = models.CharField(max_length=300)
     price = models.FloatField(default=0)
     inventory = models.IntegerField(default=0)
 
