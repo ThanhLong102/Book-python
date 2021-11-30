@@ -77,7 +77,11 @@ class OderItemViewSet(viewsets.ModelViewSet):
                                                  item=Item.objects.get(id=oder_item_data["item_id"]),
                                                  quantity=oder_item_data["quantity"])
 
-        new_oder_item.save()
+        old_item = Item.objects.get(id=oder_item_data["item_id"])
+        if old_item.inventory >= oder_item_data["quantity"]:
+            old_item.inventory -= oder_item_data["quantity"]
+            old_item.save()
+            new_oder_item.save()
 
         serializers = OrderItemSerializer(new_oder_item)
         return Response(serializers.data)
