@@ -73,13 +73,19 @@ class OderItemViewSet(viewsets.ModelViewSet):
     def create(self, request, *args, **kwargs):
         oder_item_data = request.data
 
-        new_oder_item = Oder_item.objects.create(oder=Oder.objects.get(code=oder_item_data["code"]),
-                                                 item=Item.objects.get(id=oder_item_data["item_id"]),
-                                                 quantity=oder_item_data["quantity"])
-
         old_item = Item.objects.get(id=oder_item_data["item_id"])
         if old_item.inventory >= oder_item_data["quantity"]:
             old_item.inventory -= oder_item_data["quantity"]
+            new_oder_item = Oder_item.objects.create(oder=Oder.objects.get(code=oder_item_data["code"]),
+                                                     item=Item.objects.get(id=oder_item_data["item_id"]),
+                                                     quantity=oder_item_data["quantity"])
+            old_item.save()
+            new_oder_item.save()
+        else:
+            new_oder_item = Oder_item.objects.create(oder=Oder.objects.get(code=oder_item_data["code"]),
+                                                     item=Item.objects.get(id=oder_item_data["item_id"]),
+                                                     quantity=old_item.inventory)
+            old_item.inventory = 0
             old_item.save()
             new_oder_item.save()
 
